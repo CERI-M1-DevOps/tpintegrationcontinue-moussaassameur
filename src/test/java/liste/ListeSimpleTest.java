@@ -44,7 +44,7 @@ public class ListeSimpleTest {
     }
 
     @Test
-     void toStringDonneTousLesNoeuds() {
+    void toStringDonneTousLesNoeuds() {
         System.out.println(listeATester);
         listeATester.ajout(1);
         listeATester.ajout(2);
@@ -53,7 +53,6 @@ public class ListeSimpleTest {
         assertEquals("1 2 3", listeATester.toString());
     }
 
-    @Test
     @Test
     void modifiePremier() {
         listeATester.ajout(1);
