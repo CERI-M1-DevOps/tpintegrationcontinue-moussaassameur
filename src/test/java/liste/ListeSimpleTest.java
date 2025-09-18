@@ -44,8 +44,7 @@ public class ListeSimpleTest {
     }
 
     @Test
-    void @Test
-    public void toStringDonneTousLesNoeuds() {
+     void toStringDonneTousLesNoeuds() {
         System.out.println(listeATester);
         listeATester.ajout(1);
         listeATester.ajout(2);
