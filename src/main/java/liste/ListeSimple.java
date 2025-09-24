@@ -2,7 +2,7 @@ package liste;
 
 public class ListeSimple {
     private long size;
-    Noeud tete;
+    private Noeud tete; // Ajout du modificateur private
 
     public long getSize() {
         return size;
@@ -18,7 +18,7 @@ public class ListeSimple {
         while (courant != null && !courant.getElement().equals(element)) {
             courant = courant.getSuivant();
         }
-        if (courant.getElement().equals(element)) {
+        if (courant != null && courant.getElement().equals(element)) { // Ajout de la vérification courant != null
             courant.setElement(nouvelleValeur);
         }
     }
@@ -26,7 +26,7 @@ public class ListeSimple {
     public void modifieTous(Object element, Object nouvelleValeur) {
         Noeud courant = tete;
         while (courant != null) {
-            if (courant.getElement() == element)
+            if (courant.getElement().equals(element)) // Utilisation de .equals() au lieu de ==
                 courant.setElement(nouvelleValeur);
             courant = courant.getSuivant();
         }
@@ -48,14 +48,14 @@ public class ListeSimple {
 
     public void supprimePremier(Object element) {
         if (tete != null) {
-            if (tete.getElement() == element) {
+            if (tete.getElement().equals(element)) { // Utilisation de .equals() au lieu de ==
                 tete = tete.getSuivant();
                 size--;
                 return;
             }
             Noeud precedent = tete;
             Noeud courant = tete.getSuivant();
-            while (courant != null && courant.getElement() != element) {
+            while (courant != null && !courant.getElement().equals(element)) { // Utilisation de .equals()
                 precedent = precedent.getSuivant();
                 courant = courant.getSuivant();
             }
@@ -73,14 +73,16 @@ public class ListeSimple {
     public Noeud supprimeTousRecurs(Object element, Noeud tete) {
         if (tete != null) {
             Noeud suiteListe = supprimeTousRecurs(element, tete.getSuivant());
-            if (tete.getElement() == element) {
+            if (tete.getElement().equals(element)) { // Utilisation de .equals() au lieu de ==
                 size--;
                 return suiteListe;
             } else {
                 tete.setSuivant(suiteListe);
                 return tete;
             }
-        } else return null;
+        } else {
+            return null;
+        }
     }
 
     public Noeud getAvantDernier() {
@@ -111,9 +113,12 @@ public class ListeSimple {
 
     public Noeud getPrecedent(Noeud r) {
         // la liste n'est pas vide puisqu'on transmet un Node de la liste et le Node existe obligatoirement
+        if (r == tete) { // Gestion du cas où r est la tête
+            return null;
+        }
         Noeud precedent = tete;
         Noeud courant = precedent.getSuivant();
-        while (courant != r) {
+        while (courant != null && courant != r) { // Ajout de la vérification courant != null
             precedent = courant;
             courant = courant.getSuivant();
         }
@@ -128,23 +133,22 @@ public class ListeSimple {
         if (r1 != tete && r2 != tete) {
             precedentR1 = getPrecedent(r1);
             precedentR2 = getPrecedent(r2);
-            precedentR1.setSuivant(r2);
-            precedentR2.setSuivant(r1);
+            if (precedentR1 != null) precedentR1.setSuivant(r2);
+            if (precedentR2 != null) precedentR2.setSuivant(r1);
         } else if (r1 == tete) {
             precedentR2 = getPrecedent(r2);
-            precedentR2.setSuivant(tete);
+            if (precedentR2 != null) precedentR2.setSuivant(tete);
             tete = r2;
         }
-        else {
+        else { // r2 == tete
             precedentR1 = getPrecedent(r1);
-            precedentR1.setSuivant(tete);
+            if (precedentR1 != null) precedentR1.setSuivant(tete);
             tete = r1;
         }
         Noeud temp = r2.getSuivant();
         r2.setSuivant(r1.getSuivant());
         r1.setSuivant(temp);
     }
-
 }
 
 
