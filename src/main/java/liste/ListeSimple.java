@@ -100,12 +100,9 @@ public class ListeSimple {
     public void inverser() {
         Noeud precedent = null;
         Noeud courant = tete;
-        while (courant != null && courant != r) {
+        while (courant != r) {
             precedent = courant;
             courant = courant.getSuivant();
-        }
-        if (courant == null) {
-            throw new IllegalArgumentException("Noeud non trouvé dans la liste");
         }
         return precedent;
         tete = precedent;
