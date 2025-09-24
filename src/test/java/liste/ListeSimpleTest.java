@@ -44,7 +44,6 @@ public class ListeSimpleTest {
     }
 
     @Test
-    @Test
     void toStringDonneTousLesNoeuds() {
         listeATester.ajout(1);
         listeATester.ajout(2);
@@ -105,7 +104,6 @@ public class ListeSimpleTest {
         assertEquals(3, listeATester.getSize());
     }
 
-    @Test
     @Test
     void supprimePremierEnDernierePosition() {
         listeATester.ajout(1);
