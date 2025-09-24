@@ -18,7 +18,7 @@ public class ListeSimple {
         while (courant != null && !courant.getElement().equals(element)) {
             courant = courant.getSuivant();
         }
-        if (courant != null) {
+        if (courant.getElement().equals(element)) {
             courant.setElement(nouvelleValeur);
         }
     }
@@ -26,9 +26,8 @@ public class ListeSimple {
     public void modifieTous(Object element, Object nouvelleValeur) {
         Noeud courant = tete;
         while (courant != null) {
-            if (courant.getElement().equals(element)) {
+            if (courant.getElement() == element)
                 courant.setElement(nouvelleValeur);
-            }
             courant = courant.getSuivant();
         }
     }
@@ -40,9 +39,8 @@ public class ListeSimple {
         while (n != null) {
             sb.append(n);
             n = n.getSuivant();
-            if (n != null) {
+            if (n != null)
                 sb.append(", ");
-            }
         }
         sb.append(")");
         return sb.toString();
@@ -82,15 +80,13 @@ public class ListeSimple {
                 tete.setSuivant(suiteListe);
                 return tete;
             }
-        } else {
-            return null;
-        }
+        } else return null;
     }
 
     public Noeud getAvantDernier() {
-        if (tete == null || tete.getSuivant() == null) {
+        if (tete == null || tete.getSuivant() == null)
             return null;
-        } else {
+        else {
             Noeud courant = tete;
             Noeud suivant = courant.getSuivant();
             while (suivant.getSuivant() != null) {
@@ -104,21 +100,6 @@ public class ListeSimple {
     public void inverser() {
         Noeud precedent = null;
         Noeud courant = tete;
-        while (courant != null) {
-            Noeud next = courant.getSuivant();
-            courant.setSuivant(precedent);
-            precedent = courant;
-            courant = next;
-        }
-        tete = precedent;
-    }
-
-    public Noeud getPrecedent(Noeud r) {
-        if (r == null || r == tete) {
-            throw new IllegalArgumentException("Noeud invalide ou tête de liste");
-        }
-        Noeud precedent = tete;
-        Noeud courant = precedent.getSuivant();
         while (courant != null && courant != r) {
             precedent = courant;
             courant = courant.getSuivant();
@@ -127,12 +108,23 @@ public class ListeSimple {
             throw new IllegalArgumentException("Noeud non trouvé dans la liste");
         }
         return precedent;
+        tete = precedent;
+    }
+
+    public Noeud getPrecedent(Noeud r) {
+        // la liste n'est pas vide puisqu'on transmet un Node de la liste et le Node existe obligatoirement
+        Noeud precedent = tete;
+        Noeud courant = precedent.getSuivant();
+        while (courant != r) {
+            precedent = courant;
+            courant = courant.getSuivant();
+        }
+        return precedent;
     }
 
     public void echanger(Noeud r1, Noeud r2) {
-        if (r1 == r2) {
+        if (r1 == r2)
             return;
-        }
         Noeud precedentR1;
         Noeud precedentR2;
         if (r1 != tete && r2 != tete) {
@@ -144,7 +136,8 @@ public class ListeSimple {
             precedentR2 = getPrecedent(r2);
             precedentR2.setSuivant(tete);
             tete = r2;
-        } else {
+        }
+        else {
             precedentR1 = getPrecedent(r1);
             precedentR1.setSuivant(tete);
             tete = r1;
@@ -153,4 +146,5 @@ public class ListeSimple {
         r2.setSuivant(r1.getSuivant());
         r1.setSuivant(temp);
     }
+
 }
