@@ -18,7 +18,7 @@ public class ListeSimple {
         while (courant != null && !courant.getElement().equals(element)) {
             courant = courant.getSuivant();
         }
-        if (courant != null && courant.getElement().equals(element)) { // Ajout de la vérification courant != null
+        if (courant != null) { // Simple vérification si le nœud a été trouvé
             courant.setElement(nouvelleValeur);
         }
     }
