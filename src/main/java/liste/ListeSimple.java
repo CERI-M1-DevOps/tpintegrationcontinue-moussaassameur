@@ -48,14 +48,14 @@ public class ListeSimple {
 
     public void supprimePremier(Object element) {
         if (tete != null) {
-            if (tete.getElement().equals(element)) {
+            if (tete.getElement() == element) {
                 tete = tete.getSuivant();
                 size--;
                 return;
             }
             Noeud precedent = tete;
             Noeud courant = tete.getSuivant();
-            while (courant != null && !courant.getElement().equals(element)) {
+            while (courant != null && courant.getElement() != element) {
                 precedent = precedent.getSuivant();
                 courant = courant.getSuivant();
             }
@@ -73,7 +73,7 @@ public class ListeSimple {
     public Noeud supprimeTousRecurs(Object element, Noeud tete) {
         if (tete != null) {
             Noeud suiteListe = supprimeTousRecurs(element, tete.getSuivant());
-            if (tete.getElement().equals(element)) {
+            if (tete.getElement() == element) {
                 size--;
                 return suiteListe;
             } else {
@@ -100,11 +100,12 @@ public class ListeSimple {
     public void inverser() {
         Noeud precedent = null;
         Noeud courant = tete;
-        while (courant != r) {
+        while (courant != null) {
+            Noeud next = courant.getSuivant();
+            courant.setSuivant(precedent);
             precedent = courant;
-            courant = courant.getSuivant();
+            courant = next;
         }
-        return precedent;
         tete = precedent;
     }
 
