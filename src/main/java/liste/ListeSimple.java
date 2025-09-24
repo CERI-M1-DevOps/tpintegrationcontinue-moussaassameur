@@ -145,4 +145,49 @@ public class ListeSimple {
         r1.setSuivant(temp);
     }
 
+
+    @Test
+    void testTrouverElement_ListeVide() {
+        assertNull(listeATester.trouverElement(1));
+    }
+
+    @Test
+    void testTrouverElement_PremierElement() {
+        listeATester.ajout(1);
+        assertNotNull(listeATester.trouverElement(1));
+    }
+
+    @Test
+    void testTrouverElement_DernierElement() {
+        listeATester.ajout(1);
+        listeATester.ajout(2);
+        listeATester.ajout(3);
+        assertNotNull(listeATester.trouverElement(1));
+    }
+
+    @Test
+    void testTrouverElement_Inexistant() {
+        listeATester.ajout(1);
+        listeATester.ajout(2);
+        assertNull(listeATester.trouverElement(999));
+    }
+
+    @Test
+    void testContient_ListeVide() {
+        assertFalse(listeATester.contient(1));
+    }
+
+    @Test
+    void testContient_ElementPresent() {
+        listeATester.ajout(1);
+        listeATester.ajout(2);
+        assertTrue(listeATester.contient(2));
+    }
+
+    @Test
+    void testContient_ElementAbsent() {
+        listeATester.ajout(1);
+        listeATester.ajout(2);
+        assertFalse(listeATester.contient(999));
+    }
 }
